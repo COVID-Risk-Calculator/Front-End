@@ -2,8 +2,10 @@ import { styled } from '@mui/material/styles';
 import Box from '@mui/material/Box';
 import ButtonBase from '@mui/material/ButtonBase';
 import Typography from '@mui/material/Typography';
+import { Navigate, useNavigate } from 'react-router-dom';
 
 export default function Homepage() {
+    const navigate = useNavigate()
 
     const images = [
         {
@@ -87,6 +89,16 @@ export default function Homepage() {
         transition: theme.transitions.create('opacity'),
     }));
 
+    const handleClick = (title) => {
+        if (title === 'Create a New Event') {
+            console.log('clicked: ' + title)
+            navigate('new/')
+        } else if (title === 'See Saved Events') {
+            console.log('clicked: '+ title)
+            navigate('saved/')
+        }
+    }
+
     return (
         <>
             <div style={{
@@ -112,6 +124,7 @@ export default function Homepage() {
                         style={{
                             width: image.width,
                         }}
+                        onClick={()=>handleClick(image.title)}
                     >
                         <ImageSrc style={{ backgroundImage: `url(${image.url})` }} />
                         <ImageBackdrop className="MuiImageBackdrop-root" />
